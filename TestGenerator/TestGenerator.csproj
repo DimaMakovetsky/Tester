@@ -80,6 +80,7 @@
     <Compile Include="Files.cs" />
     <Compile Include="Generation.cs" />
     <Compile Include="Methods.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
