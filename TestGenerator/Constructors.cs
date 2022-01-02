@@ -8,5 +8,14 @@ namespace TestGenerator
 {
     class Constructors
     {
+        public string Name { get; private set; }
+
+        public Dictionary<string, string> Parameters { get; private set; }
+
+        public Constructors(string name, Dictionary<string, string> parametersMap)
+        {
+            Name = name;
+            Parameters = parametersMap;
+        }
     }
 }

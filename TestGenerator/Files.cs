@@ -8,5 +8,11 @@ namespace TestGenerator
 {
     class Files
     {
+        public List<ClassData> Classes { get; private set; }
+
+        public Files(List<ClassData> classes)
+        {
+            Classes = classes;
+        }
     }
 }
