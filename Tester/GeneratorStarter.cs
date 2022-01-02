@@ -57,7 +57,7 @@ namespace Tester
                 downloadStringBlock.Post(file);
                 Console.WriteLine(file);
             }
-
+            Console.WriteLine("CUM");
             downloadStringBlock.Complete();
             return writeFileBlock.Completion;
         }

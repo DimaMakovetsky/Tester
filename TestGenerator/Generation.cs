@@ -29,8 +29,7 @@ namespace TestGenerator
                 var compilationUnit = SyntaxFactory.CompilationUnit()
                     .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")))
                     .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("NUnit.Framework")))
-                    .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("ConsoleApp.Files")))
-                    .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Moq")))
+                    .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Tester.TestHere")))
                     .AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic")))
                     .AddMembers(classDeclaration);
                 fileNameCode.Add(classData.Name + "Test", compilationUnit.NormalizeWhitespace().ToFullString());
@@ -49,15 +48,22 @@ namespace TestGenerator
             {
                 constructor = FindLargestConstructor(classData.Constructors);
                 interfaces = GetCustomTypeVariables(constructor.Parameters);
-                foreach (var custom in interfaces)
+                /*foreach (var custom in interfaces)
                 {
                     variable = GenerateVariable("_" + custom.Key, $"Mock<{custom.Value}>");
                     fields.Add(GenerateField(variable));
-                }
+                }*/
             }
 
             variable = GenerateVariable(GetClassVariableName(classData.Name), classData.Name);
+            
             fields.Add(GenerateField(variable));
+            //SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration)
+            /*var baseTypeVars = GetBaseTypeVariables(constructorInfo.Parameters);
+            foreach (var var in baseTypeVars)
+            {
+                body.Add(GenerateBasesTypesAssignStatement(var.Key, var.Value));
+            }*/
             var methods = new List<MethodDeclarationSyntax>();
             methods.Add(GenerateSetUpMethod(constructor, classData.Name));
             foreach (var methodInfo in classData.Methods)
@@ -234,7 +240,7 @@ namespace TestGenerator
         private MethodDeclarationSyntax GenerateSetUpMethod(Constructors constructorInfo, string className)
         {
             List<StatementSyntax> body = new List<StatementSyntax>();
-            if (constructorInfo != null)
+            /*if (constructorInfo != null)
             {
                 var baseTypeVars = GetBaseTypeVariables(constructorInfo.Parameters);
                 foreach (var var in baseTypeVars)
@@ -242,17 +248,18 @@ namespace TestGenerator
                     body.Add(GenerateBasesTypesAssignStatement(var.Key, var.Value));
                 }
 
+                
                 var customVars = GetCustomTypeVariables(constructorInfo.Parameters);
                 foreach (var var in customVars)
                 {
                     body.Add(GenerateCustomsTypesAssignStatement("_" + var.Key, $"Mock<{var.Value}>", ""));
                 }
-            }
+        }*/
 
             body.Add(GenerateCustomsTypesAssignStatement(
                 GetClassVariableName(className),
                 className,
-                constructorInfo != null ? ConvertParametersToStringRepresentation(constructorInfo.Parameters) : ""));
+                 ""));/**/
             return SyntaxFactory.MethodDeclaration(VoidReturnType, "SetUp")
                 .AddModifiers(PublicModifier)
                 .AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.AttributeList().Attributes.Add(SetupAttribute)))

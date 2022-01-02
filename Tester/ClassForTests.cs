@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Tester.TestHere
 {
-    class ClassForTests
+    public class ClassForTests
     {
-        private IDependency _dependency;
+        //private IDependency _dependency;
 
-        public ClassForTests(IDependency dependency)
+        /* public ClassForTests(IDependency dependency)
+         {
+             _dependency = dependency;
+         }*/
+        public ClassForTests()
         {
-            _dependency = dependency;
+           
         }
-
         public int IntService(CustomEntity entity, int id)
         {
             return 0;
