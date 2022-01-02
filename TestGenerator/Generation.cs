@@ -48,22 +48,9 @@ namespace TestGenerator
             {
                 constructor = FindLargestConstructor(classData.Constructors);
                 interfaces = GetCustomTypeVariables(constructor.Parameters);
-                /*foreach (var custom in interfaces)
-                {
-                    variable = GenerateVariable("_" + custom.Key, $"Mock<{custom.Value}>");
-                    fields.Add(GenerateField(variable));
-                }*/
             }
-
             variable = GenerateVariable(GetClassVariableName(classData.Name), classData.Name);
-            
             fields.Add(GenerateField(variable));
-            //SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration)
-            /*var baseTypeVars = GetBaseTypeVariables(constructorInfo.Parameters);
-            foreach (var var in baseTypeVars)
-            {
-                body.Add(GenerateBasesTypesAssignStatement(var.Key, var.Value));
-            }*/
             var methods = new List<MethodDeclarationSyntax>();
             methods.Add(GenerateSetUpMethod(constructor, classData.Name));
             foreach (var methodInfo in classData.Methods)
@@ -240,26 +227,10 @@ namespace TestGenerator
         private MethodDeclarationSyntax GenerateSetUpMethod(Constructors constructorInfo, string className)
         {
             List<StatementSyntax> body = new List<StatementSyntax>();
-            /*if (constructorInfo != null)
-            {
-                var baseTypeVars = GetBaseTypeVariables(constructorInfo.Parameters);
-                foreach (var var in baseTypeVars)
-                {
-                    body.Add(GenerateBasesTypesAssignStatement(var.Key, var.Value));
-                }
-
-                
-                var customVars = GetCustomTypeVariables(constructorInfo.Parameters);
-                foreach (var var in customVars)
-                {
-                    body.Add(GenerateCustomsTypesAssignStatement("_" + var.Key, $"Mock<{var.Value}>", ""));
-                }
-        }*/
-
             body.Add(GenerateCustomsTypesAssignStatement(
-                GetClassVariableName(className),
-                className,
-                 ""));/**/
+            GetClassVariableName(className),
+            className,
+            ""));
             return SyntaxFactory.MethodDeclaration(VoidReturnType, "SetUp")
                 .AddModifiers(PublicModifier)
                 .AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.AttributeList().Attributes.Add(SetupAttribute)))

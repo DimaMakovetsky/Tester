@@ -8,12 +8,6 @@ namespace Tester.TestHere
 {
     public class ClassForTests
     {
-        //private IDependency _dependency;
-
-        /* public ClassForTests(IDependency dependency)
-         {
-             _dependency = dependency;
-         }*/
         public ClassForTests()
         {
            

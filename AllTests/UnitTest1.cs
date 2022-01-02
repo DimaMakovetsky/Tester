@@ -45,7 +45,6 @@ namespace AllTests
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e+"CUM");
                 Assert.Fail(e.Message);
             }
         }
