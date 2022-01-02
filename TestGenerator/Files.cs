@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestGenerator
 {
-    class Files
+    public class Files
     {
-        public List<ClassData> Classes { get; private set; }
+        public List<Classes> Classes { get; private set; }
 
-        public Files(List<ClassData> classes)
+        public Files(List<Classes> classes)
         {
             Classes = classes;
         }

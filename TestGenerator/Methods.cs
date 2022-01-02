@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestGenerator
 {
-    class Methods
+    public class Methods
     {
         public string Name { get; private set; }
 

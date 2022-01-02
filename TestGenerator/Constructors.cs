@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestGenerator
 {
-    class Constructors
+    public class Constructors
     {
         public string Name { get; private set; }
 
