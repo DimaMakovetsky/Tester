@@ -10,10 +10,11 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            string filesDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Files";
+            Console.WriteLine("ASS\n");
+            string filesDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\TestHere";
             Console.WriteLine(filesDirectory);
 
-            string pathToGenerated = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName + "\\GeneratedTests\\Tests";
+            string pathToGenerated = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\GeneratedTests\\Tests";
             Console.WriteLine(pathToGenerated);
             if (!Directory.Exists(filesDirectory))
             {
@@ -30,11 +31,12 @@ namespace Tester
             var files = from file in allFiles
                         where file.Substring(file.Length - 3) == ".cs"
                         select file;
-            TestsGenerationManager manager = new TestsGenerationManager();
+            GeneratorStarter manager = new GeneratorStarter();
 
             Task task = manager.Generate(files, pathToGenerated, maxThreads);
             task.Wait();
             Console.WriteLine("end.");
+            Console.ReadKey();
         }
 
         private static int GetNumberFromUser()
